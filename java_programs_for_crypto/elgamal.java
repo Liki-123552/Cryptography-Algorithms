@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class ElGamal {
+public class elgamal {
 
     // Function to compute modular exponentiation (base^exp % mod)
     public static long modExp(long base, long exp, long mod) {
