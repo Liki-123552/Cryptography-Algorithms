@@ -136,4 +136,15 @@ Enter the private key d: 1234
 Enter the plaintext to encrypt (as a number): 1234
 Encrypted Message: (C1 = 4210, C2 = 7113)
 Decrypted Message: 1234
+
+
+
+Enter a large prime number p: 7919
+Enter a primitive root g modulo p: 2
+Enter private key x: 1234
+Public Key: (p = 7919, g = 2, y = 3331)
+Enter the message to encrypt (string or number):  encryption
+
+Encrypted Message: (c1 = 4210, c2 = 1197) (c1 = 6866, c2 = 5340) (c1 = 6051, c2 = 1563) (c1 = 640, c2 = 4787) (c1 = 3439, c2 = 109) (c1 = 5438, c2 = 2864) (c1 = 337, c2 = 5368) (c1 = 7300, c2 = 4352) (c1 = 864, c2 = 6357) (c1 = 3807, c2 = 4586)
+Decrypted Message: encryption
 */
