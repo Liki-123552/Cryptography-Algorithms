@@ -60,3 +60,88 @@ Encrypting String: dsde
 Encrypted Bytes: 113-2250-742193-98-144-117-8935-105-738-74-128122-105-94-3310248-104-86-9534823-7124-7988-88-179-109119-102105-109-39-117102-72-18-2393367-4398-30124108-103-77-89109-21103271727447458-8079121-8113-447435-86-91-2733123-6591-657565551253828-12593-118-52621121-9356977984119-725261-105-2835-51827-3-8518-48311113871-6246-74-86-9534823-7124-7988-88-179-109119-102105-109-39-117102-72-18-2393367-4398-30124108-103-77-89109-21103271727447458-8079121-8113-447435-86-91-2733123-6591-657565551253828-12593-118-52621121-9356977984119-725261-105-2835-51827-3-8518-48311113871-6246-78-103-77-89109-21103271727447458-8079121-8113-447435-86-91-2733123-6591-657565551253828-12593-118-52621121-9356977984119-725261-105-2835-51827-3-8518-48311113871-6246-7828-12593-118-52621121-9356977984119-725261-105-2835-51827-3-8518-48311113871-6246-782196421-1284929-56-507110456-10947-107-1217712383114-8442-40-88-3419-621358-51-41124-348-73619-127-34-8146114-50101-121838764-1711-84-90171131108753-26-23-11-5351-10622124103-7453-60-113-43-3869-17-971032910551-39-119126-128-584350-738-1215969-86-1101146568-5919107-104-421-84-34-78-6237374127-7234-119-9918101491068258-1093161-45-366761-3-1210125-106-93
 Decrypted Bytes: 100115100101
 Decrypted String: dsde*/
+
+                                ( OR )
+import java.util.*;
+import java.math.*;
+import java.nio.charset.StandardCharsets;
+
+public class rsa {
+    public static void main(String[] args) {
+        BigInteger p, q, N, phi, e, d;
+
+        // Scanner object for input
+        Scanner sc = new Scanner(System.in);
+
+        // Input p and q from the user
+        System.out.println("Enter the value for prime number p:");
+        p = new BigInteger(sc.nextLine());
+        System.out.println("Enter the value for prime number q:");
+        q = new BigInteger(sc.nextLine());
+
+        // Calculate N and φ (phi)
+        N = p.multiply(q);
+        phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
+
+        // Generate public key (e)
+        e = BigInteger.probablePrime(512, new Random());
+
+        // Ensure e and phi are co-prime (gcd(e, phi) = 1) & 0 < e < phi
+        while (phi.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(phi) < 0) {
+            e = e.add(BigInteger.ONE);
+        }
+
+        // Calculate private key (d)
+        d = e.modInverse(phi);
+
+        // Display keys
+        System.out.println("\nPrime number p: " + p);
+        System.out.println("Prime number q: " + q);
+        System.out.println("Value of N (p * q): " + N);
+        System.out.println("Value of φ (phi): " + phi);
+        System.out.println("Public key (e): " + e);
+        System.out.println("Private key (d): " + d);
+
+        // Encrypt and decrypt a message
+        System.out.print("\nEnter the plain text: ");
+        String plainText = sc.nextLine();
+        System.out.println("Encrypting String: " + plainText);
+
+        // Encrypt each character of the string
+        List<BigInteger> encryptedChars = new ArrayList<>();
+        for (char c : plainText.toCharArray()) {
+            encryptedChars.add(BigInteger.valueOf(c).modPow(e, N));
+        }
+
+        // Decrypt each character back to plain text
+        StringBuilder decryptedText = new StringBuilder();
+        for (BigInteger encryptedChar : encryptedChars) {
+            decryptedText.append((char) encryptedChar.modPow(d, N).intValue());
+        }
+
+        // Display encrypted and decrypted results
+        System.out.print("Encrypted Bytes: ");
+        for (BigInteger encryptedChar : encryptedChars) {
+            System.out.print(encryptedChar + " ");
+        }
+        System.out.println();
+
+        System.out.println("Decrypted String: " + decryptedText.toString());
+    }
+}
+Enter the value for prime number p:
+13
+Enter the value for prime number q:
+19
+Enter the plain text:
+hihi
+Prime number p: 13
+Prime number q: 19
+Value of N (p * q): 247
+Value of φ (phi): 216
+Public key (e): 5
+Private key (d): 173
+
+Encrypting String: hihi
+Encrypted Bytes: 104 0 104 0 
+Decrypted String: hihi
