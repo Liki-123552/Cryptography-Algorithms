@@ -60,4 +60,11 @@ Enter the text to encrypt (uppercase letters only): HELLO
 Enter the key (uppercase letters only): KEY
 Encrypted Text: RIJVS
 Decrypted Text: HELLO
+
+
+Enter the text to encrypt (uppercase letters only): WELCOME TO SJCE
+Enter the key (uppercase letters only): SECRET
+Encrypted Text: OIMSYIR VE FKMC
+Decrypted Text: WELCOME TO SJCE
+
 */
