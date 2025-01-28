@@ -77,3 +77,14 @@ public class elgamal {
         scanner.close();
     }
 }
+/*  output 
+Enter a large prime number p: 7919
+Enter a primitive root g modulo p: 2
+Selected private key d: 3580
+Computed e1 = 2
+Computed e2 = 6083
+Enter the plaintext to encrypt (string or number): hello
+Selected random integer r: 6706
+Encrypted Text: (80, 6037) (80, 5939) (80, 3528) (80, 3528) (80, 3626)
+Decrypted Text: hello
+*/
